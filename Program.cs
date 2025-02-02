@@ -13,10 +13,10 @@ try
     await user.GetResponse();
 
     await CommandReader.LoginOrRegist(user);
-    userId = int.Parse(((await user.GetResponse()).Split(":"))[1]);
+    await user.GetResponse();
 
-
-
+    await CommandReader.CreateSessionOrJoin(user);
+    await user.GetResponse();
     do
     {
         await user.GetResponse();

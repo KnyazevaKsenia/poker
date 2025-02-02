@@ -56,7 +56,7 @@ namespace ConsolePlayer
                 }
             }
         }
-        public async static  void CreateSessionOrJoin(Client client)
+        public async static Task CreateSessionOrJoin(Client client)
         {
             while (true) 
             {
@@ -68,10 +68,16 @@ namespace ConsolePlayer
                     var name = Console.ReadLine()?.Trim().ToLower();
                     Console.WriteLine("Amount of players");
                     var amount = Console.ReadLine()?.Trim().ToLower();
-                    if (!string.IsNullOrEmpty(name) || !string.IsNullOrEmpty(amount))
+                    Console.WriteLine("Bank");
+                    var bank = Console.ReadLine()?.Trim().ToLower();
+                    if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(amount) && !string.IsNullOrEmpty(bank))
                     {
-                        await client.CreateSession(name, int.Parse(amount));
+                        await client.CreateSession(name, int.Parse(amount), int.Parse(bank));
                         break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Wrong data");
                     }
                 }
                 if (command == "join")

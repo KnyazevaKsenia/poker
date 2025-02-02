@@ -57,9 +57,9 @@ namespace OmahaPocker
             clientSocket.Dispose();
         }
 
-        public async Task CreateSession(string name, int amountOfPlayers)
+        public async Task CreateSession(string name, int amountOfPlayers, int bank)
         {
-            var contentString = $"{name}&{amountOfPlayers}";
+            var contentString = $"{name}&{amountOfPlayers.ToString()}&{bank.ToString()}";
             byte[] bytes = Encoding.UTF8.GetBytes(contentString!);
             var registPackage = OmahaPackageHelper.CreatePackage(bytes, OmahaPokerServer.Enums.Commands.CreateSession, OmahaPokerServer.Enums.QueryType.Request, OmahaPokerServer.Enums.StatusName.None);
             await clientSocket.SendAsync(new ArraySegment<byte>(registPackage), SocketFlags.None);
